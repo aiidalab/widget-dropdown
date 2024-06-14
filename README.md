@@ -8,13 +8,10 @@ pip install widget_dropdown_extended
 
 ## Development installation
 
-Create a virtual environment and and install widget_dropdown_extended in *editable* mode with the
-optional development dependencies:
+Install the python code:
 
 ```sh
-python -m venv .venv
-source .venv/bin/activate
-pip install -e ".[dev]"
+pip install -e .[dev]
 ```
 
 You then need to install the JavaScript dependencies and run the development server.
