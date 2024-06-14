@@ -5,12 +5,12 @@ import anywidget
 import traitlets
 
 try:
-    __version__ = importlib.metadata.version("widget_dropdown_extended")
+    __version__ = importlib.metadata.version("widget_dropdown")
 except importlib.metadata.PackageNotFoundError:
     __version__ = "unknown"
 
 
-class DropdownExtended(anywidget.AnyWidget):
+class DropdownWidget(anywidget.AnyWidget):
     _esm = pathlib.Path(__file__).parent / "static" / "widget.js"
     _css = pathlib.Path(__file__).parent / "static" / "widget.css"
 

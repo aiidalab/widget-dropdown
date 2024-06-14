@@ -1,9 +1,9 @@
-# widget_dropdown_extended
+# widget_dropdown
 
 ## Installation
 
 ```sh
-pip install widget_dropdown_extended
+pip install widget_dropdown
 ```
 
 ## Development installation

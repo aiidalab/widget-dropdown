@@ -46,7 +46,7 @@ function render({ model, el }) {
     selectElement.dispatchEvent(event);
   });
 
-  el.classList.add("widget_dropdown_extended");
+  el.classList.add("widget_dropdown");
   el.appendChild(selectElement);
 }
 
