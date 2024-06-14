@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "widget_dropdown"
+name = "widget-dropdown"
 version = "0.1.0"
 dependencies = ["anywidget"]
 readme = "README.md"
