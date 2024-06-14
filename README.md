@@ -1,5 +1,7 @@
 # widget-dropdown
 
+[![PyPI - Version](https://img.shields.io/pypi/v/widget-dropdown?color=4CC61E)](https://pypi.org/project/widget-dropdown/)
+
 ## Installation
 
 ```sh
