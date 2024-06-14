@@ -1,10 +1,10 @@
 {
-	"scripts": {
-		"dev": "npm run build -- --sourcemap=inline --watch",
-		"build": "esbuild js/widget.js --minify --format=esm --bundle --outdir=src/widget_dropdown_extended/static"
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"esbuild": "^0.21.4"
-	}
+  "scripts": {
+    "dev": "npm run build -- --sourcemap=inline --watch",
+    "build": "esbuild js/widget.js --minify --format=esm --bundle --outdir=src/widget_dropdown/static"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "esbuild": "^0.21.4"
+  }
 }
