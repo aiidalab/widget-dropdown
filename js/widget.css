@@ -1,3 +1,4 @@
 .widget_dropdown select {
   width: 100%;
+  height: inherit;
 }

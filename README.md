@@ -26,3 +26,9 @@ npm run dev
 Open `example.ipynb` in JupyterLab, VS Code, or your favorite editor
 to start developing. Changes made in `js/` will be reflected
 in the notebook.
+
+## Making a new release
+
+- Update version in `pyproject.toml` & `git commit`
+- Create a corresponding git tag (`git tag vX.Y.Z`)
+- Push to Github (`git push && git push --tags`), which will start the Github Action to create a Github Release & publish the new version to PYPI.
