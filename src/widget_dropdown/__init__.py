@@ -14,9 +14,10 @@ class DropdownWidget(anywidget.AnyWidget):
     _esm = pathlib.Path(__file__).parent / "static" / "widget.js"
     _css = pathlib.Path(__file__).parent / "static" / "widget.css"
 
-    placeholder_text = traitlets.Unicode("Select an option").tag(sync=True)
-    selected_value = traitlets.Unicode("").tag(sync=True)
     options = traitlets.List([]).tag(sync=True)
+    value = traitlets.Unicode("").tag(sync=True)
+    index = traitlets.Int(0).tag(sync=True)
+    disabled = traitlets.Bool(False).tag(sync=True)
 
     def __init__(self, options=None, **kwargs):
         """Method to create the widget.

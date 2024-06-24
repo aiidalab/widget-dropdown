@@ -35,15 +35,27 @@ function render({ model, el }) {
   });
 
   selectElement.addEventListener("change", function (event) {
-    model.set("selected_value", event.target.value);
+    model.set("value", event.target.value);
+    model.set("index", event.target.selectedIndex);
     model.save_changes();
   });
 
-  model.on("change:selected_value", () => {
-    selectElement.value = model.get("selected_value");
+  model.on("change:value", () => {
+    selectElement.value = model.get("value");
     // Trigger change event manually
     const event = new Event("change");
     selectElement.dispatchEvent(event);
+  });
+
+  model.on("change:index", () => {
+    selectElement.selectedIndex = model.get("index");
+    // Trigger change event manually
+    const event = new Event("change");
+    selectElement.dispatchEvent(event);
+  });
+
+  model.on("change:disabled", () => {
+    selectElement.disabled = model.get("disabled");
   });
 
   el.classList.add("widget_dropdown");
