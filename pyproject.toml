@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "widget-dropdown"
-version = "0.1.3"
+version = "0.2.0"
 dependencies = ["anywidget"]
 readme = "README.md"
 
