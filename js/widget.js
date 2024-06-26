@@ -12,7 +12,6 @@ function render({ model, el }) {
         container.appendChild(group);
       } else {
         const option = document.createElement("option");
-        option.value = opt.value;
         option.textContent = opt.text;
         option.disabled = opt.disabled;
         container.appendChild(option);
@@ -35,16 +34,8 @@ function render({ model, el }) {
   });
 
   selectElement.addEventListener("change", function (event) {
-    model.set("value", event.target.value);
     model.set("index", event.target.selectedIndex);
     model.save_changes();
-  });
-
-  model.on("change:value", () => {
-    selectElement.value = model.get("value");
-    // Trigger change event manually
-    const event = new Event("change");
-    selectElement.dispatchEvent(event);
   });
 
   model.on("change:index", () => {
