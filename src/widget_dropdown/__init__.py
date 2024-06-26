@@ -1,3 +1,4 @@
+import copy
 import importlib.metadata
 import pathlib
 
@@ -9,32 +10,32 @@ try:
 except importlib.metadata.PackageNotFoundError:
     __version__ = "unknown"
 
-DEFAULT_OPTIONS = [{"value": "", "text": "No options", "disabled": True}]
+DEFAULT_OPTIONS = [{"text": "No options", "value": "", "disabled": True}]
 
 
 class DropdownWidget(anywidget.AnyWidget):
     """
     A Jupyter widget that displays a dropdown menu.
 
-    Selection entries are represented by a dictionary with the following
+    Dropdown entries are represented by a dictionary with the following
     structure:
 
     .. code-block:: python
 
-        {"value": value, "text": text, "disabled": True/False}
+        {"text": text, "value": value, "disabled": True/False}
 
     where the value can be a custom python object. These values are not
     used in the javascript frontend, which just tracks the selected index.
 
-    Selection entries can be grouped under a common title:
+    Entries can be grouped under a common title:
 
     .. code-block:: python
 
         {
             "group": "Group 1",
             "options": [
-                {"value": value1, "text": "Option 1", "disabled": False},
-                {"value": value2, "text": "Option 2", "disabled": True},
+                {"text": "Option 1", "value": value1, "disabled": False},
+                {"text": "Option 2", "value": value2, "disabled": True},
             ],
         }
 
@@ -43,7 +44,11 @@ class DropdownWidget(anywidget.AnyWidget):
     _esm = pathlib.Path(__file__).parent / "static" / "widget.js"
     _css = pathlib.Path(__file__).parent / "static" / "widget.css"
 
-    options = traitlets.List([]).tag(sync=True)
+    # options traitlet is not synced to js, as it can contain non-serializable values
+    options = traitlets.List([])
+
+    # values are removed in _options_js and it is synced to js
+    _options_js = traitlets.List([]).tag(sync=True)
 
     index = traitlets.Int(0).tag(sync=True)
     disabled = traitlets.Bool(False).tag(sync=True)
@@ -66,15 +71,21 @@ class DropdownWidget(anywidget.AnyWidget):
     @traitlets.observe("options")
     def _observe_options(self, change):
         self.values = []
-        self._get_values(change.new)
+        temp_options = copy.deepcopy(change.new)
+        self._parse_values(temp_options)
+        self._options_js = temp_options
 
-    def _get_values(self, options):
-        """Extract values from the options dict."""
+    def _parse_values(self, options):
+        """
+        Extract values from the input dict into self.values
+        and deletes them from the original dict.
+        """
         for opt in options:
             if "group" in opt:
-                self._get_values(opt["options"])
+                self._parse_values(opt["options"])
             else:
                 self.values.append(opt["value"])
+                del opt["value"]
 
     @traitlets.observe("index")
     def _observe_index(self, change):

@@ -27,10 +27,10 @@ function render({ model, el }) {
     selectElement.selectedIndex = 0;
   }
 
-  setOptions(model.get("options"));
+  setOptions(model.get("_options_js"));
 
-  model.on("change:options", () => {
-    setOptions(model.get("options"));
+  model.on("change:_options_js", () => {
+    setOptions(model.get("_options_js"));
   });
 
   selectElement.addEventListener("change", function (event) {
