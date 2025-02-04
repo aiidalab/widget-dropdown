@@ -56,7 +56,7 @@ class DropdownWidget(anywidget.AnyWidget):
 
     value = traitlets.Any()
 
-    def __init__(self, options=None, **kwargs):
+    def __init__(self, options=None, styles=None, **kwargs):
         """Method to create the widget.
 
         The traitlets defined above can be set as a kwargs.
@@ -68,6 +68,9 @@ class DropdownWidget(anywidget.AnyWidget):
 
         self.values = []
         self.options = options
+
+        if styles is not None:
+            self.styles = styles
 
     @traitlets.observe("options")
     def _observe_options(self, change):
