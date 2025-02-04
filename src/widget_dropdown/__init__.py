@@ -52,6 +52,7 @@ class DropdownWidget(anywidget.AnyWidget):
 
     index = traitlets.Int(0).tag(sync=True)
     disabled = traitlets.Bool(False).tag(sync=True)
+    styles = traitlets.Dict({}).tag(sync=True)
 
     value = traitlets.Any()
 

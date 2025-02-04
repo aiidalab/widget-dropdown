@@ -1,5 +1,11 @@
 import "./widget.css";
 
+function setStyles(element, styles) {
+  Object.keys(styles).forEach((style) => {
+    element.style[style] = styles[style];
+  });
+}
+
 function render({ model, el }) {
   let selectElement = document.createElement("select");
 
@@ -28,9 +34,14 @@ function render({ model, el }) {
   }
 
   setOptions(model.get("_options_js"));
+  setStyles(selectElement, model.get("styles"));
 
   model.on("change:_options_js", () => {
     setOptions(model.get("_options_js"));
+  });
+
+  model.on("change:styles", () => {
+    setStyles(selectElement, model.get("styles"));
   });
 
   selectElement.addEventListener("change", function (event) {
